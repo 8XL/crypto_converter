@@ -1,14 +1,12 @@
 production.api.coindesk.com/v2/price/ticker/
-sparkline?assets=ADA,BAT,BCH,BSV,BTC,BTG,DASH,DCR,DAI,DOGE
-,EOS,ETH,ETC,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX
-,XLM,XMR,XRP,XTZ,ZEC,ZRX
+sparkline?assets=BTC,DASH,DOGE
+,ETH,LTC,XEM,USDT,XRP
 
 Запрос цен на крипто валютки. По таймингам не понял, глянь. 
 Там история и ласт цена.
 
-https://production.api.coindesk.com/v2/price/ticker?assets=
-ADA,BAT,BCH,BSV,BTC,BTG,DASH,DCR,DAI,DOGE,EOS,ETH,ETC,IOTA,LTC
-,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX,XLM,XMR,XRP,XTZ,ZEC,ZRX
+https://production.api.coindesk.com/v2/price/ticker?assets=BTC,DASH,DOGE
+,ETH,LTC,XEM,USDT,XRP
 
 тут процентики на валютки. Выбери кода три-ЧИТЫРИ-ПИААААААТЬ...сам думай
 
@@ -34,3 +32,20 @@ https://production.api.coindesk.com/v2/price/values/BTC
 
 
 вродь всёу
+
+ React.useEffect(() => {
+        let clean = false;
+        const name = obj.iso;
+        const fetchData = async () => {
+        const { data } = await axios(`https://production.api.coindesk.com/v2/price/ticker?assets=${name}`);
+        setTicker(ticker=>{
+            ...ticker,
+            price: data.name.ohlc.c,
+            
+        })
+        }
+        fetchData();
+          
+          return () => { clean = true; }
+      }, []) 
+    

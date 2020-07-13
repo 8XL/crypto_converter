@@ -5,10 +5,17 @@ const useStyles = makeStyles((theme)=>({
         marginTop: '10vw',
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',  
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     card:{
-        justifyContent: 'center'
+        width: 'inherit',
+        justifyContent: 'center',
+        flexWrap: 'wrap'
+    },
+    card__item:{
+        width: 200,
+        height: 140,
     },
     title: {
         fontSize: 14,
@@ -19,7 +26,11 @@ const useStyles = makeStyles((theme)=>({
         fontWeight: 700,
     },
     calc:{
-        position: 'sticky',
+        alignSelf: 'flex-start',
+        padding: 40,
+    },
+    form:{
+        margin: 10
     }
 }))
 

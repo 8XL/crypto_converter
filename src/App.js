@@ -1,9 +1,50 @@
 import React from 'react';
+import axios from 'axios';
 
-import { Container, Card, CardContent, Typography, CardActionArea, Grid, CssBaseline } from '@material-ui/core';
+import { Container, Card, CardContent, Typography, TextField, Grid, CssBaseline } from '@material-ui/core';
 import { useStyles } from './other';
+import { CoinCard } from './components';
+import reducer from './reducer';
 
 function App() {
+  // так удобнее контролить монетки да и на случай всякий
+  const coins = ['BTC','DASH','DOGE','ETH']; 
+
+  const [state, dispatch] = React.useReducer(reducer, {
+    coins: [],
+    coin1st: {
+      name: '',
+      price: ''
+    },
+    coin2nd: {
+      name: '',
+      price: ''
+    },
+    clicked: true,
+  })
+
+  React.useEffect(() => {
+    let clean = false;
+    const fetchData = () => {
+      coins.map(item => {
+        axios
+          .get(`https://production.api.coindesk.com/v2/price/ticker?assets=${item}`)
+          .then(res =>{
+            !clean
+            && dispatch({
+              type: 'DATA_COINS',
+              payload: {
+                iso: res.data.data[item].iso,
+                name: res.data.data[item].name
+              },
+            });
+          })
+      })  
+    }
+    fetchData();
+      
+      return () => { clean = true; }
+  }, []) 
 
   const classes = useStyles();
   return (
@@ -11,33 +52,51 @@ function App() {
       <CssBaseline />
         <Container component='main' maxWidth='lg'>
           <div className={classes.wrapper}>
-          <Grid container spacing={2} xs className={classes.card}>
-            <Grid item>
-              <Card>
-              <CardActionArea>
-                <CardContent>
-                  <Typography className={classes.title} color='textSecondary' gutterBottom>
-                    Названьице общее(типа нэйм приложения)
-                  </Typography>
-                  <Typography variant='h5' component='h2' className={classes.name}>
-                    Нэйм монетки
-                  </Typography>
-                  <Typography variant='body2' component='p'>
-                    Последняя цена в долларах
-                  </Typography>
-                  <Typography variant='body3' component='p'>
-                    Изменение в процентах
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              </Card> 
+            <Grid container spacing={2} xs className={classes.card}>
+              {state.coins.map((el, index)=>
+                <CoinCard 
+                  coin={el} 
+                  i={index} 
+                  state={state} 
+                  dispatch={dispatch}
+                  key={el.iso+el.name} 
+                />
+              )}
             </Grid>
-          </Grid>
-          <Grid container spacing={1} xs={4} className={classes.calc}>
-            <Grid item>
-              Калькуляшка
+            <Grid container spacing={1} xs={5} className={classes.calc}>
+              <Grid item>
+                <Card>
+                  <CardContent>
+                    <TextField 
+                      className={classes.form} 
+                      size="small" label={state.coin1st.name} 
+                      variant='outlined' 
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                    <TextField
+                      className={classes.form} 
+                      size="small" 
+                      label={state.coin2nd.name} 
+                      variant='outlined' 
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                    <TextField
+                      className={classes.form} 
+                      size="small" 
+                      label='TETHER/USD' 
+                      variant='outlined' 
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
           </div>
         </Container>
     </div>
