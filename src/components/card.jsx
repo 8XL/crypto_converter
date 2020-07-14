@@ -14,6 +14,7 @@ function CoinCard ({ coin, i, state, dispatch }) {
     const [ticker, setTicker] = React.useState({
         price: null,
         percent: null,
+        history: []
     })
     const [count, setCount] = React.useState(0);
 
@@ -44,7 +45,7 @@ function CoinCard ({ coin, i, state, dispatch }) {
         const interval = setInterval(()=>{
             setCount(count=>
                 ++count
-            )
+            ) 
         }, 10000)
         
             return ()=> clearInterval(interval);
@@ -58,7 +59,8 @@ function CoinCard ({ coin, i, state, dispatch }) {
             setTicker({
                 ...ticker,
                 price: data.data[name].ohlc.c,
-                percent: data.data[name].change.percent
+                percent: data.data[name].change.percent,
+                history: [...ticker.history, data.data[name].ohlc.c]
             })
         }
         fetchData();
@@ -69,7 +71,13 @@ function CoinCard ({ coin, i, state, dispatch }) {
     return(
         
             <Grid item>
-                <Card>
+                <Card className={
+                    ticker.history[ticker.history.length-2]>ticker.history[ticker.history.length-1]
+                    ? classes.red 
+                    : ticker.history[ticker.history.length-2]<ticker.history[ticker.history.length-1]
+                    ? classes.green
+                    : ''
+                }>
                     <CardActionArea onClick={handleClick} disabled={coin.iso===state.coin1st.name || coin.iso===state.coin2nd.name }>
                         <CardContent className={classes.card__item}>
                             <Typography className={classes.title} color='textSecondary' gutterBottom>
@@ -78,7 +86,7 @@ function CoinCard ({ coin, i, state, dispatch }) {
                             <Typography variant='h5' component='h2' className={classes.name}>
                                 {coin.iso}
                             </Typography>
-                            <Typography variant='body2' component='p'>
+                            <Typography variant='body2' component='p' >
                                 {ticker.price} $
                             </Typography>
                             <Typography variant='body3' component='p'>

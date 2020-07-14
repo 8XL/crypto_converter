@@ -26,11 +26,22 @@ const useStyles = makeStyles((theme)=>({
         fontWeight: 700,
     },
     calc:{
+        position: 'sticky',
+        top: 0,
         alignSelf: 'flex-start',
         padding: 40,
     },
     form:{
-        margin: 10
+        margin: 10,
+        width: '92%'
+    },
+    red:{
+        backgroundColor: '#fc8181',
+        transition: '0.4s'
+    },
+    green:{
+        backgroundColor: '#85d979',
+        transition: '0.4s'
     }
 }))
 
