@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { Container, Card, CardContent, Typography, TextField, Grid, CssBaseline } from '@material-ui/core';
 import { useStyles } from './other';
-import { CoinCard } from './components';
+import { CoinCard, Calc } from './components';
 import reducer from './reducer';
 
 function App() {
@@ -64,38 +64,7 @@ function App() {
               )}
             </Grid>
             <Grid container spacing={1} xs={5} className={classes.calc}>
-              <Grid item>
-                <Card>
-                  <CardContent>
-                    <TextField 
-                      className={classes.form} 
-                      size="small" label={state.coin1st.name} 
-                      variant='outlined' 
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                    <TextField
-                      className={classes.form} 
-                      size="small" 
-                      label={state.coin2nd.name} 
-                      variant='outlined' 
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                    <TextField
-                      className={classes.form} 
-                      size="small" 
-                      label='TETHER/USD' 
-                      variant='outlined' 
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </CardContent>
-                </Card>
-              </Grid>
+              <Calc state={state} />
             </Grid>
           </div>
         </Container>

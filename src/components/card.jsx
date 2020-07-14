@@ -19,8 +19,6 @@ function CoinCard ({ coin, i, state, dispatch }) {
 
 
     const handleClick = () => {
-        console.log(state.clicked)
-
         if(form.index===i && state.clicked){
             dispatch({
                 type: 'SET_CALC_1',
@@ -72,7 +70,7 @@ function CoinCard ({ coin, i, state, dispatch }) {
         
             <Grid item>
                 <Card>
-                    <CardActionArea onClick={e=>handleClick(e)} disabled={coin.iso===state.coin1st.name || coin.iso===state.coin2nd.name }>
+                    <CardActionArea onClick={handleClick} disabled={coin.iso===state.coin1st.name || coin.iso===state.coin2nd.name }>
                         <CardContent className={classes.card__item}>
                             <Typography className={classes.title} color='textSecondary' gutterBottom>
                                 {coin.name}
