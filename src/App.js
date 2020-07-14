@@ -3,15 +3,16 @@ import axios from 'axios';
 
 import { Container, Grid, CssBaseline } from '@material-ui/core';
 import { useStyles } from './other';
-import { CoinCard, Calc } from './components';
+
+import { CoinCard, Calc, Search } from './components';
 import reducer from './reducer';
 
 function App() {
   // так удобнее контролить монетки да и на случай всякий
-  const coins = ['BTC','DASH','DOGE','ETH','ADA','BAT','BCH']; 
-  //ADA,BAT,BCH,BSV,BTC,BTG,DASH,DCR,DAI,DOGE
-  //,EOS,ETH,ETC,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX ,'LTC','QTUM','LINK','LSK','XEM','NEO','XRP','XTZ','ZEC'
-  //,XLM,XMR,XRP,XTZ,ZEC,ZRX доступные тикеры
+  const coins = ['BTC','DASH','DOGE','ETH']; 
+  //ADA,BAT,BCH,BSV,BTC,BTG,DASH,'DCR','DAI',DOGE
+  //,'EOS','ETH','ETC',IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX 
+  //,'XLM','XMR',XRP,XTZ,ZEC,'ZRX' доступные тикеры
   const [state, dispatch] = React.useReducer(reducer, {
     coins: [],
     coin1st: {
@@ -23,6 +24,7 @@ function App() {
       price: ''
     },
     clicked: true,
+    search: '',
   })
 
   React.useEffect(() => {
@@ -59,17 +61,18 @@ function App() {
               
               {state.coins.map((el, index)=>
                 <CoinCard 
-                  coin={el} 
-                  i={index} 
-                  state={state} 
-                  dispatch={dispatch}
-                  key={el.iso+el.name} 
+                  coin={ el } 
+                  i={ index } 
+                  state={ state } 
+                  dispatch={ dispatch }
+                  key={ el.iso+el.name } 
                 />
               )}
 
             </Grid>
             <Grid container spacing={1} xs={5} className={classes.calc}>
-              <Calc state={state} />
+              <Search dispatch={ dispatch } />
+              <Calc state={ state } />
             </Grid>
           </div>
         </Container>

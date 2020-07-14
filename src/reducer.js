@@ -24,6 +24,11 @@ export default (state, action) => {
                 },
                 clicked: true,
             };
+        case 'SEARCH_VALUE':
+            return {
+                ...state,
+                search: action.payload
+            };
 
         default: 
             return state;

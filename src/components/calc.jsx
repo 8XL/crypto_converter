@@ -49,8 +49,6 @@ function Calc({state}) {
             }
         })
     }
-
-    console.log()
     const classes = useStyles();
     return(
         <Grid item>

@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme)=>({
     calc:{
         position: 'sticky',
         top: 0,
+        flexDirection: 'column',
         alignSelf: 'flex-start',
         padding: 40,
     },
@@ -42,6 +43,9 @@ const useStyles = makeStyles((theme)=>({
     green:{
         backgroundColor: '#85d979',
         transition: '0.4s'
+    },
+    hidden: {
+        display: 'none',
     }
 }))
 

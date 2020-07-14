@@ -65,12 +65,22 @@ function CoinCard ({ coin, i, state, dispatch }) {
         }
         fetchData();
           
-          return () => { clean = true; }
-      }, [count]) 
+            return () => { clean = true; }
+    }, [count]);
+
+    let itemHidden;
+    if(state.search){
+        if(coin.name.search(state.search) < 0 
+            && coin.iso.search(state.search) <0){
+                itemHidden = classes.hidden
+        } else {
+            itemHidden = ''
+        }
+    }
    
     return(
         
-            <Grid item>
+            <Grid item className={itemHidden}>
                 <Card className={
                     ticker.history[ticker.history.length-2]>ticker.history[ticker.history.length-1]
                     ? classes.red 
