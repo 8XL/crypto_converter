@@ -50,6 +50,7 @@ function Calc({state}) {
         })
     }
     const classes = useStyles();
+    
     return(
         <Grid item>
                 <Card>

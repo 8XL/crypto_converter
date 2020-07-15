@@ -14,10 +14,10 @@ function CoinCard ({ coin, i, state, dispatch }) {
     const [ticker, setTicker] = React.useState({
         price: null,
         percent: null,
-        history: []
+        color: null
     })
     const [count, setCount] = React.useState(0);
-
+    const[color, setColor] = React.useState('')
 
     const handleClick = () => {
         if(form.index===i && state.clicked){
@@ -47,25 +47,27 @@ function CoinCard ({ coin, i, state, dispatch }) {
                 ++count
             ) 
         }, 10000)
-        
             return ()=> clearInterval(interval);
-        
     }, [])
+
     React.useEffect(() => {
-        let clean = false;
         const name = coin.iso;
         const fetchData = async () => {
             const { data } = await axios(`https://production.api.coindesk.com/v2/price/ticker?assets=${name}`);
+            if(ticker.price)
+                if(ticker.price>data.data[name].ohlc.c){
+                    setColor(classes.red)
+                } else {
+                    setColor(classes.green)
+                } // все равно коряво, да?
+                
             setTicker({
                 ...ticker,
                 price: data.data[name].ohlc.c,
-                percent: data.data[name].change.percent,
-                history: [...ticker.history, data.data[name].ohlc.c]
+                percent: data.data[name].change.percent
             })
         }
         fetchData();
-          
-            return () => { clean = true; }
     }, [count]);
 
     let itemHidden;
@@ -77,17 +79,11 @@ function CoinCard ({ coin, i, state, dispatch }) {
             itemHidden = ''
         }
     }
-   
+
     return(
         
-            <Grid item className={itemHidden}>
-                <Card className={
-                    ticker.history[ticker.history.length-2]>ticker.history[ticker.history.length-1]
-                    ? classes.red 
-                    : ticker.history[ticker.history.length-2]<ticker.history[ticker.history.length-1]
-                    ? classes.green
-                    : ''
-                }>
+            <Grid item className={ itemHidden }>
+                <Card className={ color }>
                     <CardActionArea onClick={handleClick} disabled={coin.iso===state.coin1st.name || coin.iso===state.coin2nd.name }>
                         <CardContent className={classes.card__item}>
                             <Typography className={classes.title} color='textSecondary' gutterBottom>

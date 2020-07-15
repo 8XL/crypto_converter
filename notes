@@ -34,19 +34,11 @@ https://production.api.coindesk.com/v2/price/values/BTC
 
 вродь всёу
 
- React.useEffect(() => {
-        let clean = false;
-        const name = obj.iso;
-        const fetchData = async () => {
-        const { data } = await axios(`https://production.api.coindesk.com/v2/price/ticker?assets=${name}`);
-        setTicker(ticker=>{
-            ...ticker,
-            price: data.name.ohlc.c,
-            
-        })
-        }
-        fetchData();
-          
-          return () => { clean = true; }
-      }, []) 
+сейчас состояние, определяющее цвет карточки(массик), инкрементируется из 
+респонса, тем самым забивая массив бесполезной инфой, но фактически 
+нужны только последние две цены. Подумай, как ограничить длинну массива,
+лиииибо, что возможно костыль, а ты дурак(да), пропиши отдельный массив,
+который шифтиться при длине свыше 2, пуш в него респонс с ценой,
+а уже самого его делай состоянием. такое себе решение, на мой взгляд,
+но других пока не придумал.
     

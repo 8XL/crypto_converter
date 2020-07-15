@@ -57,7 +57,7 @@ function App() {
       <CssBaseline />
         <Container component='main' maxWidth='lg'>
           <div className={classes.wrapper}>
-            <Grid container spacing={2} xs className={classes.card}>
+            <Grid container spacing={2} md className={classes.card}>
               
               {state.coins.map((el, index)=>
                 <CoinCard 
@@ -70,7 +70,7 @@ function App() {
               )}
 
             </Grid>
-            <Grid container spacing={1} xs={5} className={classes.calc}>
+            <Grid container spacing={1} xs={4} className={classes.calc}>
               <Search dispatch={ dispatch } />
               <Calc state={ state } />
             </Grid>

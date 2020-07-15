@@ -9,11 +9,13 @@ const useStyles = makeStyles((theme)=>({
         justifyContent: 'center',
     },
     card:{
-        width: 'inherit',
+        maxWidth: 'inherit',
         justifyContent: 'center',
+        alignSelf: 'flex-start',
         flexWrap: 'wrap'
     },
     card__item:{
+        
         width: 200,
         height: 140,
     },
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme)=>({
         top: 0,
         flexDirection: 'column',
         alignSelf: 'flex-start',
-        padding: 40,
+        
     },
     form:{
         margin: 10,
