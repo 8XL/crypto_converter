@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { Card, CardContent, Typography, CardActionArea, Grid } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActionArea, Grid, BottomNavigation } from '@material-ui/core';
 import { useStyles } from '../other';
 
 function CoinCard ({ coin, i, state, dispatch }) {
@@ -14,7 +14,6 @@ function CoinCard ({ coin, i, state, dispatch }) {
     const [ticker, setTicker] = React.useState({
         price: null,
         percent: null,
-        color: null
     })
     const [count, setCount] = React.useState(0);
     const[color, setColor] = React.useState('')
@@ -45,7 +44,7 @@ function CoinCard ({ coin, i, state, dispatch }) {
         const interval = setInterval(()=>{
             setCount(count=>
                 ++count
-            ) 
+            )
         }, 10000)
             return ()=> clearInterval(interval);
     }, [])
@@ -55,12 +54,12 @@ function CoinCard ({ coin, i, state, dispatch }) {
         const fetchData = async () => {
             const { data } = await axios(`https://production.api.coindesk.com/v2/price/ticker?assets=${name}`);
             if(ticker.price)
-                if(ticker.price>data.data[name].ohlc.c){
+                if(ticker.price > data.data[name].ohlc.c){
                     setColor(classes.red)
                 } else {
                     setColor(classes.green)
                 } // все равно коряво, да?
-                
+
             setTicker({
                 ...ticker,
                 price: data.data[name].ohlc.c,
@@ -69,6 +68,22 @@ function CoinCard ({ coin, i, state, dispatch }) {
         }
         fetchData();
     }, [count]);
+
+    const btn = React.useRef();
+    React.useEffect(()=>{
+        let clean = false;
+        if(i===0 && !clean){
+            dispatch({
+                type:'REF1',
+                payload: btn.current,
+        })} else if(i===1 && !clean){
+                dispatch({
+                type:'REF2',
+                payload: btn.current,
+        })}
+        
+        return ()=> { clean = true }
+    },[])
 
     let itemHidden;
     if(state.search){
@@ -84,12 +99,26 @@ function CoinCard ({ coin, i, state, dispatch }) {
         
             <Grid item className={ itemHidden }>
                 <Card className={ color }>
-                    <CardActionArea onClick={handleClick} disabled={coin.iso===state.coin1st.name || coin.iso===state.coin2nd.name }>
+                    <CardActionArea 
+                        ref={ btn }
+                        onClick={ handleClick } 
+                        disabled={
+                            coin.iso===state.coin1st.name 
+                            || coin.iso===state.coin2nd.name 
+                        }>
                         <CardContent className={classes.card__item}>
-                            <Typography className={classes.title} color='textSecondary' gutterBottom>
+                            <Typography 
+                                className={classes.title} 
+                                color='textSecondary' 
+                                gutterBottom
+                            >
                                 {coin.name}
                             </Typography>
-                            <Typography variant='h5' component='h2' className={classes.name}>
+                            <Typography 
+                                variant='h5' 
+                                component='h2' 
+                                className={classes.name}
+                            >
                                 {coin.iso}
                             </Typography>
                             <Typography variant='body2' component='p' >

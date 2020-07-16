@@ -29,7 +29,47 @@ export default (state, action) => {
                 ...state,
                 search: action.payload
             };
-
+        case 'FORM1':
+            return {
+                ...state,
+                form:{
+                    form1:action.payload.form1,
+                    form3:action.payload.form3,
+                }
+            };
+        case 'FORM2':
+            return {
+                ...state,
+                form:{
+                    form2:action.payload.form2,
+                    form3:action.payload.form3,
+                }
+            };
+        case 'FORM3':
+            return {
+                ...state,
+                form:{
+                    form1:action.payload.form1,
+                    form2:action.payload.form2,
+                    form3:action.payload.form3,
+                }
+            };
+        case 'REF1':
+            return {
+                ...state,
+                refs:{
+                    ...state.refs,
+                    ref1: action.payload,
+                }
+            };
+        case 'REF2':
+            return {
+                ...state,
+                refs:{
+                    ...state.refs,
+                    ref2: action.payload,
+                }
+            };
         default: 
             return state;
     }

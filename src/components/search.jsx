@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, TextField, Grid,} from '@material-ui/core';
 import { useStyles } from '../other';
 
-function Search ({ dispatch }) {
+function Search ({ dispatch, state }) {
 
     const handleChange = (e) =>{
         const mask = new RegExp(e.target.value, 'ig')

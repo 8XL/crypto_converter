@@ -4,11 +4,11 @@ import axios from 'axios';
 import { Container, Grid, CssBaseline } from '@material-ui/core';
 import { useStyles } from './other';
 
-import { CoinCard, Calc, Search } from './components';
+import { CoinCard, Calc, Search, Learning } from './components';
 import reducer from './reducer';
 
 function App() {
-  // так удобнее контролить монетки да и на случай всякий
+  // так удобнее контролить монетки, да и на случай всякий
   const coins = ['BTC','DASH','DOGE','ETH']; 
   //ADA,BAT,BCH,BSV,BTC,BTG,DASH,'DCR','DAI',DOGE
   //,'EOS','ETH','ETC',IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX 
@@ -17,14 +17,23 @@ function App() {
     coins: [],
     coin1st: {
       name: '',
-      price: ''
+      price: '',
     },
     coin2nd: {
       name: '',
-      price: ''
+      price: '',
     },
     clicked: true,
     search: '',
+    form: {
+      form1:'',
+      form2:'',
+      form3:'',
+    },
+    refs: {
+      ref1: null,
+      ref2: null,
+    },
   })
 
   React.useEffect(() => {
@@ -54,6 +63,7 @@ function App() {
 
   return (
     <div className="App">
+    <Learning state={state} dispatch={dispatch} />
       <CssBaseline />
         <Container component='main' maxWidth='lg'>
           <div className={classes.wrapper}>
@@ -71,11 +81,12 @@ function App() {
 
             </Grid>
             <Grid container spacing={1} xs={4} className={classes.calc}>
-              <Search dispatch={ dispatch } />
-              <Calc state={ state } />
+              <Search state={ state } dispatch={ dispatch } />
+              <Calc state={ state } dispatch={ dispatch }/>
             </Grid>
           </div>
         </Container>
+        
     </div>
   );
 }

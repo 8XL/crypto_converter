@@ -3,49 +3,36 @@ import React from 'react';
 import { Card, CardContent, TextField, Grid,} from '@material-ui/core';
 import { useStyles } from '../other';
 
-function Calc({state}) {
-    const [form, setForm] = React.useState({
-        form1:{
-            value: '',
-        },
-        form2:{
-            value: '',
-        },
-        form3:{
-            value: '',
-        },
-    })
+
+function Calc({state, dispatch}) {
+    const { form } = state; 
 
     const handleChangeForm1 = (e) =>{
-        setForm({
-            form1:{
-                value: e.target.value,
-            },
-            form3:{
-                value: e.target.value * state.coin1st.price,
+        dispatch({
+            type: 'FORM1',
+            payload:{
+                form1: e.target.value,
+                form3: e.target.value * state.coin1st.price,
             }
         })
     }
     const handleChangeForm2 = (e) =>{
-        setForm({
-            form2:{
-                value: e.target.value,
-            },
-            form3:{
-                value: e.target.value * state.coin2nd.price,
+        dispatch({
+            type:'FORM2',
+            payload:{
+                form2: e.target.value,
+                form3: e.target.value * state.coin2nd.price,
             }
         })
-    }
+    }    
+    
     const handleChangeForm3 = (e) =>{
-        setForm({
-            form1:{
-                value: form.form3.value/state.coin1st.price,
-            },
-            form2:{
-                value: form.form3.value/state.coin2nd.price,
-            },
-            form3:{
-                value: e.target.value,
+        dispatch({
+            type: 'FORM3',
+            payload:{
+                form1:form.form3/state.coin1st.price,
+                form2:form.form3/state.coin2nd.price,
+                form3:e.target.value,
             }
         })
     }
@@ -62,11 +49,13 @@ function Calc({state}) {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      disabled={!state.coin1st.price}
                       name='form1'
                       onChange={handleChangeForm1}
                       value={
                         state.coin1st.price
-                            &&form.form3.value/state.coin1st.price}
+                            &&form.form3/state.coin1st.price
+                      }
                     />
                     <TextField
                       className={classes.form} 
@@ -76,25 +65,27 @@ function Calc({state}) {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      disabled={!state.coin2nd.price}
                       name='form2'
                       onChange={handleChangeForm2}
                       value={
                         state.coin2nd.price
-                            &&form.form3.value/state.coin2nd.price}
+                            &&form.form3/state.coin2nd.price}
                     />
                     <TextField
                       className={classes.form} 
                       size="small"
-                      label='TETHER/USD' 
+                      label={!state.coin1st.price? '':'TETHER/USD'} 
                       variant='outlined' 
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      disabled={!state.coin1st.price}
                       name='form3'
                       onChange={handleChangeForm3}
                       value={
                         state.coin1st.price
-                            &&form.form3.value}
+                            &&form.form3}
                     />
                   </CardContent>
                 </Card>
