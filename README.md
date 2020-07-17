@@ -1,68 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Крипто конвертер значица...
 
-In the project directory, you can run:
+## Карточки с валютой 
+...отражают актуальную цену раз в 10 секунд, меняют цвета в зависимости от новой цены(как на настоящих фондовых десках, дыааа), по клику выбранная валюта отправляется в... 
 
-### `npm start`
+## Конвертер
+...который конвертирует количество выбранной валюты в фиат(тот же доллар, только точнее до единиц после нуля) и, если выбрана вторая валюта для сравнения, выводит количество второй валюты от первой, или первой от второй, или первой и второй от количества фиата...<b>В ОБЩЕМ</b> они все взаимосвязаны и при вводе значения в любую строку, остальные подсчитают результат.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Количество возможных монет достаточно велико и, дабы не искать каждую скроллом, добавил есть...
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Поле поиска 
+...нужной валюты(просто для удобства). 
+Вводишь буковы, он оставляет соответствия этим букафкам. Все просто...но, если вдруг что-то не совсем было ясно, то я так же добавил...
 
-### `npm test`
+## Обучение
+...которое покажет и расскажет само, как пользовать приложение. Да, его было бы гораздо проще сделать интерактивным(отслушивая клики по элементам и просто ведя пользователя), но мне это показалось легким и было принято волевое решение написать обучение в формате презентации, где клики и ввод значений производится програмно. Так алгоритм чуточку сложнее и интереснее.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Вот и всё...спасибо
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+ps если кто-то увидит, не полениться прочесть ридми, затем посмотреть код и оставит в нем комментарии по доработке/ошибкам/лучшим решением - буду очень признателен.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
