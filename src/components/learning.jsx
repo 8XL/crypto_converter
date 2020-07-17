@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Button } from '@material-ui/core';
+
 import { Stage1, Stage2, Stage3, Stage4, Stage5 } from '../popups';
 
 function Learning ({state, dispatch}) {
@@ -11,11 +13,16 @@ function Learning ({state, dispatch}) {
         st5: false,
     })
 
-    const handleClick = () => {
+    const handleClick = () =>{
         setFlag(flag=>({
             ...flag,
             st1: true
-            }))
+        }))
+        dispatch({
+            type: 'RESET_LEARNING'
+        })
+        state.refs.ref1.style.transition = '1s';
+        state.refs.ref1.style.transform = 'rotate(360deg)';
     }
     
     const toggler = (action) =>{
@@ -48,6 +55,8 @@ function Learning ({state, dispatch}) {
                 st3: false,
                 st4: true,
             })); 
+            state.refs.ref2.style.transition = '1s';
+            state.refs.ref2.style.transform = 'rotate(360deg)';
             state.refs.ref2.click();
         break;
         case 'STAGE4_5': 
@@ -67,8 +76,7 @@ function Learning ({state, dispatch}) {
                 st5: false,
             }));
             dispatch({
-                type: 'SEARCH_VALUE',
-                payload: ''
+                type: 'RESET_LEARNING',
             }) 
         break;
     default: 
@@ -80,12 +88,14 @@ function Learning ({state, dispatch}) {
             st5: false,
         }))
     }}
-    
+    const {st1, st2, st3, st4, st5} = flag
     return(
-        <div>  <button onClick={()=>setFlag(flag=>({
-            ...flag,
-            st1: true
-        }))}>asdasdasd</button>
+        <div>
+            <Button 
+                disabled = {st1||st2||st3||st4||st5}
+                onClick={handleClick}>
+                <u>WikiHow</u>
+            </Button>  
             {
                 flag.st1
                     ? <Stage1 toggler={toggler} />

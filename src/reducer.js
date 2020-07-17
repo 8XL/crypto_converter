@@ -70,6 +70,25 @@ export default (state, action) => {
                     ref2: action.payload,
                 }
             };
+        case 'RESET_LEARNING':
+            return {
+                ...state,
+                coin1st: {
+                    name: '',
+                    price: '',
+                },
+                coin2nd: {
+                    name: '',
+                    price: '',
+                },
+                clicked: true,
+                search: '',
+                form: {
+                    form1:'',
+                    form2:'',
+                    form3:'',
+                },
+            };
         default: 
             return state;
     }

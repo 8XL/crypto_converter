@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { Card, CardContent, Typography, CardActionArea, Grid, BottomNavigation } from '@material-ui/core';
+import { Card, CardContent, Typography, CardActionArea, Grid } from '@material-ui/core';
 import { useStyles } from '../other';
 
 function CoinCard ({ coin, i, state, dispatch }) {

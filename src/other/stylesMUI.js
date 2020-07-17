@@ -48,6 +48,36 @@ const useStyles = makeStyles((theme)=>({
     },
     hidden: {
         display: 'none',
+    },
+    stage1:{
+        position: 'absolute',
+        zIndex: 10,
+        top: '10vh',
+        left: '38vw',
+    },
+    stage2:{
+        position: 'absolute',
+        zIndex: 10,
+        top: '10vh',
+        left: '38vw',
+    },
+    stage3:{
+        position: 'absolute',
+        zIndex: 10,
+        top: '20vh',
+        left: '50vw',
+    },
+    stage4:{
+        position: 'absolute',
+        zIndex: 10,
+        top: '40vh',
+        left: '38vw',
+    },
+    stage5:{
+        position: 'absolute',
+        zIndex: 10,
+        top: '10vh',
+        left: '50vw',
     }
 }))
 
