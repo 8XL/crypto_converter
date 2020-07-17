@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme)=>({
     wrapper:{
-        marginTop: '10vw',
+        marginTop: '5vw',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',

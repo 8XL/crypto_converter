@@ -16,3 +16,7 @@ input:disabled,
 button:disabled{
   background-color:#e8e8e8;
 }
+.learning {
+  position: sticky;
+  top: 0
+}

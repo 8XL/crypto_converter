@@ -9,10 +9,13 @@ import reducer from './reducer';
 
 function App() {
   // так удобнее контролить монетки, да и на случай всякий
-  const coins = ['BTC','DASH','DOGE','ETH']; 
-  //ADA,BAT,BCH,BSV,BTC,BTG,DASH,'DCR','DAI',DOGE
-  //,'EOS','ETH','ETC',IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX 
-  //,'XLM','XMR',XRP,XTZ,ZEC,'ZRX' доступные тикеры
+  const coins = ['BTC','DASH','DOGE','ETH','DCR','DAI',
+  'EOS','ETH','ETC',
+  'XLM','XMR'
+  ,'ZRX']; 
+  //ADA,BAT,BCH,BSV,BTC,BTG,DASH,DOGE
+  //,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX 
+  //,,XRP,XTZ,ZEC доступные тикеры
   const [state, dispatch] = React.useReducer(reducer, {
     coins: [],
     coin1st: {

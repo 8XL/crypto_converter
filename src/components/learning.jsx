@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 
 import { Stage1, Stage2, Stage3, Stage4, Stage5 } from '../popups';
 
+
 function Learning ({state, dispatch}) {
     const [flag, setFlag] = React.useState({
         st1: false,
@@ -90,7 +91,7 @@ function Learning ({state, dispatch}) {
     }}
     const {st1, st2, st3, st4, st5} = flag
     return(
-        <div>
+        <div className='learning'>
             <Button 
                 disabled = {st1||st2||st3||st4||st5}
                 onClick={handleClick}>
