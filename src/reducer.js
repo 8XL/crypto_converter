@@ -89,7 +89,7 @@ export default (state, action) => {
                     form3:'',
                 },
             };
-        default: 
-            return state;
+    default: 
+        return state;
     }
 }

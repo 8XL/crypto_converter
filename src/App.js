@@ -2,20 +2,21 @@ import React from 'react';
 import axios from 'axios';
 
 import { Container, Grid, CssBaseline } from '@material-ui/core';
-import { useStyles } from './other';
 
 import { CoinCard, Calc, Search, Learning } from './components';
 import reducer from './reducer';
+import { useStyles } from './other';
+
+// так удобнее контролить монетки, да и на случай всякий
+const coins = ['BTC','DASH','DOGE','ETH','DCR','DAI',
+'EOS','ETH','ETC',
+'XLM','XMR'
+,'ZRX']; 
+//ADA,BAT,BCH,BSV,BTC,BTG,DASH,DOGE
+//,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX 
+//,,XRP,XTZ,ZEC доступные тикеры
 
 function App() {
-  // так удобнее контролить монетки, да и на случай всякий
-  const coins = ['BTC','DASH','DOGE','ETH','DCR','DAI',
-  'EOS','ETH','ETC',
-  'XLM','XMR'
-  ,'ZRX']; 
-  //ADA,BAT,BCH,BSV,BTC,BTG,DASH,DOGE
-  //,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX 
-  //,,XRP,XTZ,ZEC доступные тикеры
   const [state, dispatch] = React.useReducer(reducer, {
     coins: [],
     coin1st: {
@@ -29,15 +30,15 @@ function App() {
     clicked: true,
     search: '',
     form: {
-      form1:'',
-      form2:'',
-      form3:'',
+      form1: '',
+      form2: '',
+      form3: '',
     },
     refs: {
       ref1: null,
       ref2: null,
     },
-  })
+  });
 
   React.useEffect(() => {
     let clean = false;
@@ -56,42 +57,40 @@ function App() {
             });
           })
       })  
-    }
+    };
     fetchData();
       
       return () => { clean = true; }
   }, []) 
 
   const classes = useStyles();
-
   return (
     <div className="App">
-    <Learning state={state} dispatch={dispatch} />
+      <Learning state={ state } dispatch={ dispatch } />
       <CssBaseline />
-        <Container component='main' maxWidth='lg'>
-          <div className={classes.wrapper}>
-            <Grid container spacing={2} md className={classes.card}>
-              
-              {state.coins.map((el, index)=>
-                <CoinCard 
-                  coin={ el } 
-                  i={ index } 
-                  state={ state } 
-                  dispatch={ dispatch }
-                  key={ el.iso+el.name } 
-                />
-              )}
+      <Container component='main' maxWidth='lg'>
+        <div className={ classes.wrapper }>
+          <Grid container spacing={2} md className={ classes.card }>
+                
+            {state.coins.map((el, index)=>
+              <CoinCard 
+                coin={ el } 
+                i={ index } 
+                state={ state } 
+                dispatch={ dispatch }
+                key={ el.iso+el.name } 
+              />
+            )}
 
-            </Grid>
-            <Grid container spacing={1} xs={4} className={classes.calc}>
-              <Search state={ state } dispatch={ dispatch } />
-              <Calc state={ state } dispatch={ dispatch }/>
-            </Grid>
-          </div>
-        </Container>
-        
+          </Grid>
+          <Grid container spacing={1} xs={4} className={ classes.calc }>
+            <Search dispatch={ dispatch } />
+            <Calc state={ state } dispatch={ dispatch }/>
+          </Grid>
+        </div>
+      </Container>
     </div>
-  );
+  )
 }
 
 export default App;

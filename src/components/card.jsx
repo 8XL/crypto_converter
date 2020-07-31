@@ -15,8 +15,8 @@ function CoinCard ({ coin, i, state, dispatch }) {
         price: null,
         percent: null,
     })
-    const [count, setCount] = React.useState(0);
-    const[color, setColor] = React.useState('')
+    const [count, setCount] = React.useState(0)
+    const[color, setColor] = React.useState('');
 
     const handleClick = () => {
         if(form.index===i && state.clicked){
@@ -38,7 +38,9 @@ function CoinCard ({ coin, i, state, dispatch }) {
                 }
             })
         }
-    } 
+    };
+
+    const btn = React.useRef();
 
     React.useEffect(()=>{
         const interval = setInterval(()=>{
@@ -48,7 +50,6 @@ function CoinCard ({ coin, i, state, dispatch }) {
         }, 10000)
             return ()=> clearInterval(interval);
     }, [])
-
     React.useEffect(() => {
         const name = coin.iso;
         const fetchData = async () => {
@@ -68,8 +69,6 @@ function CoinCard ({ coin, i, state, dispatch }) {
         }
         fetchData();
     }, [count]);
-
-    const btn = React.useRef();
     React.useEffect(()=>{
         let clean = false;
         if(i===0 && !clean){
@@ -83,7 +82,7 @@ function CoinCard ({ coin, i, state, dispatch }) {
         })}
         
         return ()=> { clean = true }
-    },[])
+    },[]);
 
     let itemHidden;
     if(state.search){
@@ -93,45 +92,43 @@ function CoinCard ({ coin, i, state, dispatch }) {
         } else {
             itemHidden = ''
         }
-    }
+    };
 
     return(
-        
-            <Grid item className={ itemHidden }>
-                <Card className={ color }>
-                    <CardActionArea 
-                        ref={ btn }
-                        onClick={ handleClick } 
-                        disabled={
-                            coin.iso===state.coin1st.name 
-                            || coin.iso===state.coin2nd.name 
-                        }>
-                        <CardContent className={classes.card__item}>
-                            <Typography 
-                                className={classes.title} 
-                                color='textSecondary' 
-                                gutterBottom
-                            >
-                                {coin.name}
-                            </Typography>
-                            <Typography 
-                                variant='h5' 
-                                component='h2' 
-                                className={classes.name}
-                            >
-                                {coin.iso}
-                            </Typography>
-                            <Typography variant='body2' component='p' >
-                                {ticker.price} $
-                            </Typography>
-                            <Typography variant='body3' component='p'>
-                                {(Math.ceil(ticker.percent * 100) / 100 )} %
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                </Card> 
-            </Grid>
-        
+        <Grid item className={ itemHidden }>
+            <Card className={ color }>
+                <CardActionArea 
+                    ref={ btn }
+                    onClick={ handleClick } 
+                    disabled={
+                        coin.iso===state.coin1st.name 
+                        || coin.iso===state.coin2nd.name 
+                    }>
+                    <CardContent className={ classes.card__item }>
+                        <Typography 
+                            className={ classes.title } 
+                            color='textSecondary' 
+                            gutterBottom
+                        >
+                            {coin.name}
+                        </Typography>
+                        <Typography 
+                            variant='h5' 
+                            component='h2' 
+                            className={ classes.name }
+                        >
+                            { coin.iso }
+                        </Typography>
+                        <Typography variant='body2' component='p' >
+                            {ticker.price} $
+                        </Typography>
+                        <Typography variant='body3' component='p'>
+                            {(Math.ceil(ticker.percent * 100) / 100 )} %
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card> 
+        </Grid>
     )
 }
 

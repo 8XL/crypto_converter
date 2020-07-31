@@ -3,17 +3,17 @@ import React from 'react';
 import { Card, CardContent, TextField, Grid,} from '@material-ui/core';
 import { useStyles } from '../other';
 
-function Search ({ dispatch, state }) {
+function Search ({ dispatch }) {
 
     const handleChange = (e) =>{
-        const mask = new RegExp(e.target.value, 'ig')
+        const mask = new RegExp(e.target.value, 'ig');
         dispatch({
             type: 'SEARCH_VALUE',
             payload: mask,
         })
-    }
-    const classes = useStyles();
+    };
 
+    const classes = useStyles();
     return(
         <Grid item>
             <Card>

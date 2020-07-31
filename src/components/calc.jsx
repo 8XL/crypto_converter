@@ -25,7 +25,6 @@ function Calc({state, dispatch}) {
             }
         })
     }    
-    
     const handleChangeForm3 = (e) =>{
         dispatch({
             type: 'FORM3',
@@ -35,61 +34,63 @@ function Calc({state, dispatch}) {
                 form3:e.target.value,
             }
         })
-    }
+    };
+
     const classes = useStyles();
-    
     return(
-        <Grid item>
-                <Card>
-                  <CardContent>
-                    <TextField 
-                      className={classes.form} 
-                      size="small" label={state.coin1st.name} 
-                      variant='outlined' 
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      disabled={!state.coin1st.price}
-                      name='form1'
-                      onChange={handleChangeForm1}
-                      value={
-                        state.coin1st.price
-                            &&form.form3/state.coin1st.price
-                      }
-                    />
-                    <TextField
-                      className={classes.form} 
-                      size="small" 
-                      label={state.coin2nd.name} 
-                      variant='outlined' 
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      disabled={!state.coin2nd.price}
-                      name='form2'
-                      onChange={handleChangeForm2}
-                      value={
-                        state.coin2nd.price
-                            &&form.form3/state.coin2nd.price}
-                    />
-                    <TextField
-                      className={classes.form} 
-                      size="small"
-                      label={!state.coin1st.price? '':'TETHER/USD'} 
-                      variant='outlined' 
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      disabled={!state.coin1st.price}
-                      name='form3'
-                      onChange={handleChangeForm3}
-                      value={
-                        state.coin1st.price
-                            &&form.form3}
-                    />
-                  </CardContent>
-                </Card>
-              </Grid>
+      <Grid item>
+        <Card>
+          <CardContent>
+            <TextField 
+              className={ classes.form } 
+              size="small" label={ state.coin1st.name } 
+              variant='outlined' 
+              InputLabelProps={{
+                shrink: true,
+              }}
+              disabled={ !state.coin1st.price }
+              name='form1'
+              onChange={ handleChangeForm1 }
+              value={
+                state.coin1st.price
+                    &&form.form3/state.coin1st.price
+              }
+            />
+            <TextField
+              className={ classes.form } 
+              size="small" 
+              label={ state.coin2nd.name } 
+              variant='outlined' 
+              InputLabelProps={{
+                shrink: true,
+              }}
+              disabled={ !state.coin2nd.price }
+              name='form2'
+              onChange={ handleChangeForm2 }
+              value={
+                state.coin2nd.price
+                  &&form.form3/state.coin2nd.price
+              }
+            />
+            <TextField
+              className={ classes.form } 
+              size="small"
+              label={ !state.coin1st.price? '':'TETHER/USD' } 
+              variant='outlined' 
+              InputLabelProps={{
+                shrink: true,
+              }}
+              disabled={ !state.coin1st.price }
+              name='form3'
+              onChange={ handleChangeForm3 }
+              value={
+                state.coin1st.price
+                  &&form.form3
+              }
+            />
+          </CardContent>
+        </Card>
+      </Grid>
     )
 }
 
