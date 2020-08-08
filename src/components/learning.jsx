@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-
-import { Stage1, Stage2, Stage3, Stage4, Stage5 } from '../popups';
+import { Stages } from '../popups';
+import { stage1Contents, stage2Contents, stage3Contents, stage4Contents, stage5Contents } from '../popups/learningContent';
 
 function Learning ({state, dispatch}) {
     const [stage, setStage] = React.useState({
@@ -100,15 +100,15 @@ function Learning ({state, dispatch}) {
             </Button>  
             {
                 st1
-                    ? <Stage1 toggler={toggler} />
+                    ? <Stages content={stage1Contents} toggler={toggler} />
                 :st2
-                    ? <Stage2 toggler={toggler} />
+                    ? <Stages content={stage2Contents} toggler={toggler} />
                 :st3
-                    ? <Stage3 toggler={toggler} />
+                    ? <Stages content={stage3Contents} toggler={toggler} />
                 :st4
-                    ? <Stage4 toggler={toggler} />
+                    ? <Stages content={stage4Contents} toggler={toggler} />
                 :st5
-                    ? <Stage5 toggler={toggler} />
+                    ? <Stages content={stage5Contents} toggler={toggler} />
                 : ''
             }
         </div>

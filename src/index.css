@@ -17,6 +17,7 @@ button:disabled{
   background-color:#e8e8e8;
 }
 .learning {
-  position: sticky;
+  position: fixed;
+  z-index: 100;
   top: 0
 }

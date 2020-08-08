@@ -3,18 +3,19 @@ import axios from 'axios';
 
 import { Container, Grid, CssBaseline } from '@material-ui/core';
 
-import { CoinCard, Calc, Search, Learning } from './components';
+import { Calc, Search, Learning } from './components';
 import reducer from './reducer';
 import { useStyles } from './other';
 
 // так удобнее контролить монетки, да и на случай всякий
-const coins = ['BTC','DASH','DOGE','ETH','DCR','DAI',
+const coins = ['BTC','DASH','DOGE','DCR','DAI',
 'EOS','ETH','ETC',
 'XLM','XMR'
-,'ZRX']; 
+,'ZRX', 'TRX']; 
 //ADA,BAT,BCH,BSV,BTC,BTG,DASH,DOGE
-//,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT,TRX 
+//,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT 
 //,,XRP,XTZ,ZEC доступные тикеры
+const CoinCard = React.lazy(() => import('./components/card'));
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, {
@@ -43,7 +44,7 @@ function App() {
   React.useEffect(() => {
     let clean = false;
     const fetchData = () => {
-      coins.map(item => {
+      coins.map((item) => {
         axios
           .get(`https://production.api.coindesk.com/v2/price/ticker?assets=${item}`)
           .then(res =>{
@@ -71,16 +72,20 @@ function App() {
       <Container component='main' maxWidth='lg'>
         <div className={ classes.wrapper }>
           <Grid container spacing={2} md className={ classes.card }>
+
+            <React.Suspense fallback={<div>Подожди-подожди...</div>}>     
+              {state.coins.map((el, index)=>
                 
-            {state.coins.map((el, index)=>
-              <CoinCard 
-                coin={ el } 
-                i={ index } 
-                state={ state } 
-                dispatch={ dispatch }
-                key={ el.iso+el.name } 
-              />
-            )}
+                  <CoinCard 
+                    coin={ el } 
+                    i={ index } 
+                    state={ state } 
+                    dispatch={ dispatch }
+                    key={ el.iso+el.name } 
+                  />
+
+              )}
+            </React.Suspense>
 
           </Grid>
           <Grid container spacing={1} xs={4} className={ classes.calc }>

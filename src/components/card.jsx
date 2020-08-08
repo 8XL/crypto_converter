@@ -8,9 +8,9 @@ function CoinCard ({ coin, i, state, dispatch }) {
     const classes = useStyles();
     // const arr = Object.entries(coin);
     // const obj = arr[0][1];
-    const [form, setForm] = React.useState({
+    const form = {
         index: i,
-    })
+    };
     const [ticker, setTicker] = React.useState({
         price: null,
         percent: null,
