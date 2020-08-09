@@ -1,20 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 
 import { Container, Grid, CssBaseline } from '@material-ui/core';
 
 import { Calc, Search, Learning } from './components';
-import reducer from './reducer';
 import { useStyles } from './other';
+import { fetchCoin, coins } from './api/fetchDataCoins';
+import reducer from './reducer';
 
-// так удобнее контролить монетки, да и на случай всякий
-const coins = ['BTC','DASH','DOGE','DCR','DAI',
-'EOS','ETH','ETC',
-'XLM','XMR'
-,'ZRX', 'TRX']; 
-//ADA,BAT,BCH,BSV,BTC,BTG,DASH,DOGE
-//,IOTA,LTC,QTUM,LINK,LSK,XEM,NEO,USDC,USDT 
-//,,XRP,XTZ,ZEC доступные тикеры
 const CoinCard = React.lazy(() => import('./components/card'));
 
 function App() {
@@ -44,20 +36,17 @@ function App() {
   React.useEffect(() => {
     let clean = false;
     const fetchData = () => {
-      coins.map((item) => {
-        axios
-          .get(`https://production.api.coindesk.com/v2/price/ticker?assets=${item}`)
-          .then(res =>{
+      coins.map(async(item) => {
+        const { data } = await fetchCoin(item);
             !clean
             && dispatch({
               type: 'DATA_COINS',
               payload: {
-                iso: res.data.data[item].iso,
-                name: res.data.data[item].name
+                iso: data[item].iso,
+                name: data[item].name
               },
             });
           })
-      })  
     };
     fetchData();
       

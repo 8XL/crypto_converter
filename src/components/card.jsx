@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { Card, CardContent, Typography, CardActionArea, Grid } from '@material-ui/core';
 import { useStyles } from '../other';
+import { fetchCoin } from '../api/fetchDataCoins'
 
 function CoinCard ({ coin, i, state, dispatch }) {
     const classes = useStyles();
@@ -53,9 +54,9 @@ function CoinCard ({ coin, i, state, dispatch }) {
     React.useEffect(() => {
         const name = coin.iso;
         const fetchData = async () => {
-            const { data } = await axios(`https://production.api.coindesk.com/v2/price/ticker?assets=${name}`);
+            const { data }  = await fetchCoin(name);
             if(ticker.price)
-                if(ticker.price > data.data[name].ohlc.c){
+                if(ticker.price > data[name].ohlc.c){
                     setColor(classes.red)
                 } else {
                     setColor(classes.green)
@@ -63,8 +64,8 @@ function CoinCard ({ coin, i, state, dispatch }) {
 
             setTicker({
                 ...ticker,
-                price: data.data[name].ohlc.c,
-                percent: data.data[name].change.percent
+                price: data[name].ohlc.c,
+                percent: data[name].change.percent
             })
         }
         fetchData();
