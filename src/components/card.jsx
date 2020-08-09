@@ -88,7 +88,7 @@ function CoinCard ({ coin, i, state, dispatch }) {
     let itemHidden;
     if(state.search){
         if(coin.name.search(state.search) < 0 
-            && coin.iso.search(state.search) <0){
+            && coin.iso.search(state.search) < 0){
                 itemHidden = classes.hidden
         } else {
             itemHidden = ''

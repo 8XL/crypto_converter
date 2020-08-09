@@ -63,14 +63,14 @@ function App() {
           <Grid container spacing={2} md className={ classes.card }>
 
             <React.Suspense fallback={<div>Подожди-подожди...</div>}>     
-              {state.coins.map((el, index)=>
+              {state.coins.map((coin, index)=>
                 
                   <CoinCard 
-                    coin={ el } 
+                    coin={ coin } 
                     i={ index } 
                     state={ state } 
                     dispatch={ dispatch }
-                    key={ el.iso+el.name } 
+                    key={ coin.iso+coin.name } 
                   />
 
               )}
